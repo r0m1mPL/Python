@@ -10,9 +10,9 @@
 <body>
     <div class="buttons">
         <p>
-            <a class="button" href="aboutmyself/">About myself</a>
-            <a class="button" href="projects/">My projects</a>
-            <a class="button" href="contacts/">Contacts</a>
+            <a class="button" href="{% url 'aboutmyself' %}">About myself</a>
+            <a class="button" href="{% url 'project_list' %}">My projects</a>
+            <a class="button" href="{% url 'contacts' %}">Contacts</a>
         </p>
     </div>
 
