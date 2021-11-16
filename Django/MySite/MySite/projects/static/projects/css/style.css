@@ -1,0 +1,101 @@
+.main_text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 50pt;
+    color: black;
+    text-align: center;
+}
+
+.buttons {
+    height: 10em;
+    position: relative;
+}
+
+.buttons p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.button {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40pt;
+    background: yellow;
+    color: black;
+    text-decoration: none;
+    border: 6px solid black;
+}
+
+.aboutmyself {
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    font-size: 30px;
+    width: 50%;
+}
+
+.contacts {
+    margin-left: 5%;
+    text-decoration: none;
+}
+
+.contact {
+    text-decoration: none;
+}
+
+.my_contact {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20pt;
+    color: black;
+    text-decoration: none;
+}
+
+.contact_field {
+    color: red;
+}
+
+.project_title {
+    text-decoration: none;
+}
+
+.p_t {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30pt;
+    color: black;
+    text-align: center;
+}
+
+.project_short_description {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15pt;
+    color: black;
+}
+
+.project_pub_date {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 10pt;
+    color: black;
+    text-align: right;
+}
+
+.project_detail_title {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 50pt;
+    color: black;
+    text-align: center;
+}
+
+.project_detail_description {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30pt;
+    color: black;
+}
+
+.project_detail_pub_date {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15pt;
+    color: black;
+    text-align: right;
+}
