@@ -1,17 +1,16 @@
-from re import template
 from bs4 import BeautifulSoup
 import requests
 import json
 import os
-import shutil
-from time import sleep
-from random import randrange
 
 HEADERS = {
     "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36",
 }
 
-ID = 1
+try:
+    ID = sorted(map(int, os.listdir("./data/images/")))[-1] + 1
+except:
+    ID = 1
 
 
 def save_image(img_url: str, k: int) -> str:
@@ -23,6 +22,7 @@ def save_image(img_url: str, k: int) -> str:
 
 def collect_product_data(product_url: str, product_id: int) -> dict:
     global ID
+    print(ID)
     response = requests.get(url=product_url, headers=HEADERS)
     html = response.text
     soup = BeautifulSoup(html, 'lxml')
@@ -104,51 +104,27 @@ def collect_product_data(product_url: str, product_id: int) -> dict:
 
 
 def get_product_urls(url: str) -> list:
-    data = []
+    try:
+        with open("./data/data.json") as file:
+            data = json.load(file)
+    except:
+        data = []
     response = requests.get(url=url, headers=HEADERS)
     soup = BeautifulSoup(response.text, 'lxml')
-    tmp = soup.find('div', class_="category-pagination").find('div',
-                                                              class_="row").find('div').text.strip().split('(')[-1].split()
-    for item in tmp:
-        try:
-            pages = int(item)
-        except:
-            continue
-    url += "&page="
-    for page in range(1, pages + 1):
-        url = url.split("&page=")[0] + "&page=" + str(page)
-        response = requests.get(url=url, headers=HEADERS)
-        soup = BeautifulSoup(response.text, 'lxml')
-        page_products = soup.find('div', class_="products").find(
-            'div', class_="row product-list-js").find_all(
-            'div', class_="product-thumb")
-        for product in page_products:
-            product_url = product.find('div', class_="image").find(
-                'a').get('href').strip()
-            product_id = int(product.find(
-                'div', class_="button-group").find('a', class_="quickbox").get('href').strip().split("product_id=")[-1].split("&")[0])
-            data.append(collect_product_data(
-                product_url=product_url, product_id=product_id))
-            sleep(randrange(5, 10))
-        break
+    page_products = soup.find('div', class_="products").find(
+        'div', class_="row product-list-js").find_all('div', class_="product-thumb")
+    for product in page_products:
+        product_url = product.find('div', class_="image").find(
+            'a').get('href').strip()
+        product_id = int(product.find('div', class_="button-group").find(
+            'a', class_="quickbox").get('href').strip().split("product_id=")[-1].split("&")[0])
+        data.append(collect_product_data(
+            product_url=product_url, product_id=product_id))
     return data
 
 
 def main():
-    try:
-        shutil.rmtree('./data')
-    except:
-        pass
-    try:
-        os.mkdir("./data")
-    except:
-        pass
-    try:
-        os.mkdir("./data/images")
-    except:
-        pass
-    # url = input().strip()
-    url = "https://petmania.com.ua/ua/tovary-dlya-sobak?sort=rating&order=DESC&limit=5"
+    url = input().strip()
     data = get_product_urls(url=url)
     with open('./data/data.json', 'w') as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
