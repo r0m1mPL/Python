@@ -100,6 +100,12 @@ def set_folders_name(file_path):
 
 # func for resize image for current screen width and height
 def resize_image(width, height):
-    img = Image.open(r'data/background.jpg')
-    new_img = img.resize((width, height), Image.ANTIALIAS)
-    new_img.save("data/background.jpg", "JPEG")
+    try:
+        img = Image.open(r'data/background.jpg')
+        new_img = img.resize((width, height), Image.ANTIALIAS)
+        new_img.save("data/background.jpg", "JPEG")
+    except:
+        img = Image.open(r'../data/background.jpg')
+        new_img = img.resize((width, height), Image.ANTIALIAS)
+        new_img.save("../data/background.jpg", "JPEG")
+

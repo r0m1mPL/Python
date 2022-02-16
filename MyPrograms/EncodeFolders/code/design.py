@@ -55,7 +55,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         # set styles
         self.centralwidget.setStyleSheet("""
-                background: url("data/background.jpg") no-repeat center;
+                background: url("../data/background.jpg") no-repeat center;
             """)
         # set obj name
         self.centralwidget.setObjectName("centralwidget")
@@ -82,12 +82,12 @@ class Ui_MainWindow(object):
         self.RenameFolders.setGeometry(
             QtCore.QRect(RenameFolders_x, RenameFolders_y, RenameFolders_w, RenameFolders_h))
         # set styles
-        self.RenameFolders.setStyleSheet("""
-                font: bold Times New Roman;
-                color: white;
-                font-size: 32px;
-                border: 2px solid rgb(255, 51, 133);
-            """)
+        #self.RenameFolders.setStyleSheet("""
+         #       font: bold Times New Roman;
+          #      color: white;
+           #     font-size: 32px;
+            #    border: 2px solid rgb(255, 51, 133);
+             #""")
         # set obj name
         self.RenameFolders.setObjectName("RenameFolders")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -126,7 +126,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         # set window icon
-        self.setWindowIcon(QtGui.QIcon('data/icon.ico'))
+        self.setWindowIcon(QtGui.QIcon('../data/icon.ico'))
 
         # set up settings
         self.setupUi(self)
