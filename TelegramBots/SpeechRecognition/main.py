@@ -30,8 +30,7 @@ async def voice_recognition(voice_path: str) -> str:
         os.remove(f"{voice_path}.wav")
 
         text_ua = r.recognize_google(audio_data, language="uk-UA")
-        text_ru = r.recognize_google(audio_data, language="ru-RU")
-        return text_ua.strip() + " | " + text_ru.strip()
+        return text_ua.strip()
     except:
         return ""
 
@@ -46,7 +45,7 @@ async def voice_message_handler(message: Message):
 
     recognition_text = await voice_recognition(str(BASE_DIR / voice.file_id))
     
-    if recognition_text and recognition_text.strip() != "|":
+    if recognition_text:
         await message.reply(recognition_text)
 
 
