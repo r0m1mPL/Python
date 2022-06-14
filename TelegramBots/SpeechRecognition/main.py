@@ -46,7 +46,7 @@ async def voice_message_handler(message: Message):
 
     recognition_text = await voice_recognition(str(BASE_DIR / voice.file_id))
     
-    if recognition_text:
+    if recognition_text and recognition_text.strip() != "|":
         await message.reply(recognition_text)
 
 
