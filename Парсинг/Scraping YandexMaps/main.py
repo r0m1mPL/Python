@@ -5,9 +5,6 @@ from datetime import datetime
 from fake_useragent import UserAgent
 from pathlib import Path
 
-from stem import Signal
-from stem.control import Controller
-
 COOKIES = {
     'yandexuid': '1617052961655386916',
     'skid': '5380125311655386918',
