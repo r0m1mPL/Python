@@ -8,6 +8,7 @@ from exeptions import CantDownloadYouTubeVideo
 from dataclasses import dataclass
 from pathlib import Path
 import urllib.request
+import string
 
 
 @dataclass
@@ -30,12 +31,15 @@ async def download_video(message: types.Message) -> None:
     "Downloads video from YouTube by given url"
     try:
         yt = YouTube(message.text.strip())
-        yt_title = yt.title.replace('#', '').strip()
+
+        yt_title = yt.title
+        for item in string.punctuation:
+            yt_title = yt_title.replace(item, '')
 
         video = Video(
                 title=yt_title, 
                 link=message.text.strip(), 
-                path=BASE_DIR / f"tmp/{yt_title}.mp4", 
+                path=BASE_DIR / f"tmp/{yt_title.replace('?', '')}.mp4", 
                 thumbnail=BASE_DIR / f"tmp/{yt.title}.jpg"
             )
                 
