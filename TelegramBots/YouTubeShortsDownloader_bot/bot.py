@@ -30,11 +30,12 @@ async def download_video(message: types.Message) -> None:
     "Downloads video from YouTube by given url"
     try:
         yt = YouTube(message.text.strip())
+        yt_title = yt.title.replace('#', '').strip()
 
         video = Video(
-                title=yt.title, 
+                title=yt_title, 
                 link=message.text.strip(), 
-                path=BASE_DIR / f"tmp/{yt.title}.mp4", 
+                path=BASE_DIR / f"tmp/{yt_title}.mp4", 
                 thumbnail=BASE_DIR / f"tmp/{yt.title}.jpg"
             )
                 
