@@ -1,6 +1,6 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
-from config import API_TOKEN, BASE_DIR
+from config import API_TOKEN, BASE_DIR, REPLACEABLE_SYMBOLS
 from pytube import YouTube
 from aiogram.utils.markdown import hlink
 import os
@@ -8,7 +8,6 @@ from exeptions import CantDownloadYouTubeVideo
 from dataclasses import dataclass
 from pathlib import Path
 import urllib.request
-import string
 
 
 @dataclass
@@ -33,7 +32,7 @@ async def download_video(message: types.Message) -> None:
         yt = YouTube(message.text.strip())
 
         yt_title = yt.title
-        for item in string.punctuation:
+        for item in REPLACEABLE_SYMBOLS:
             yt_title = yt_title.replace(item, '')
 
         video = Video(
