@@ -133,3 +133,4 @@ dmypy.json
 setenv.sh
 tmp.py
 1.py
+tmp/
