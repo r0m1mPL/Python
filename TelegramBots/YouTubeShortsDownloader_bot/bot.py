@@ -26,14 +26,25 @@ bot = Bot(token=API_TOKEN, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
 
 
+async def _make_video_title(title: str) -> str:
+    """Makes video title"""
+    for item in REPLACEABLE_SYMBOLS:
+        title = title.replace(item, '')
+    
+    return title
+
+
+
+async def download_video_thumbnail(url, path) -> None:
+    """Downloads video thumbnail"""
+    urllib.request.urlretrieve(url, path)
+
+
 async def download_video(message: types.Message) -> None:
     "Downloads video from YouTube by given url"
     try:
         yt = YouTube(message.text.strip())
-
-        yt_title = yt.title
-        for item in REPLACEABLE_SYMBOLS:
-            yt_title = yt_title.replace(item, '')
+        yt_title = await _make_video_title(yt.title)
 
         video = Video(
                 title=yt_title, 
@@ -49,7 +60,7 @@ async def download_video(message: types.Message) -> None:
             yt_video.download(BASE_DIR / "tmp")
 
         if not os.path.exists(video.thumbnail):
-            urllib.request.urlretrieve(yt.thumbnail_url, video.thumbnail)
+            download_video_thumbnail(yt.thumbnail_url, video.thumbnail)
     except:
         raise CantDownloadYouTubeVideo
 
