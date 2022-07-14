@@ -10,5 +10,3 @@ API_TOKEN = os.getenv("API_TOKEN", '')
 REPLACEABLE_SYMBOLS = string.punctuation.replace('(', '').replace(')', 
         '').replace('[', '').replace(']', '').replace('&', '').replace('-', 
                 '').replace('!', '')
-
-print(REPLACEABLE_SYMBOLS)

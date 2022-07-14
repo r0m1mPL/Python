@@ -60,7 +60,7 @@ async def download_video(message: types.Message) -> None:
             yt_video.download(BASE_DIR / "tmp")
 
         if not os.path.exists(video.thumbnail):
-            download_video_thumbnail(yt.thumbnail_url, video.thumbnail)
+            await download_video_thumbnail(yt.thumbnail_url, video.thumbnail)
     except:
         raise CantDownloadYouTubeVideo
 
