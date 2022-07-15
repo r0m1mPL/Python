@@ -1,4 +1,3 @@
-from celery import shared_task
 from config import BASE_DIR
 import os
 from datetime import datetime
@@ -16,11 +15,6 @@ def clean_tmp_folder() -> None:
 
         if last_file_modification.day != day_now:
             os.remove(file_path)
-
-
-@shared_task
-def clear_tmp():
-    clean_tmp_folder()
 
 
 if __name__ == "__main__":
