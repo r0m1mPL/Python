@@ -1,6 +1,6 @@
-# Systemd Unit
-# systemctl enable $(pwd)/youtube-shorts.service
-# systemctl start youtube-shorts.service
+# Systemd Unit:
+#   systemctl enable $(pwd)/youtube-shorts.service
+#   systemctl start youtube-shorts.service
 
 [Unit]
 Description=YouTube Shorts Downloader Bot service
