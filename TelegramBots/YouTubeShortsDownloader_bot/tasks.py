@@ -1,3 +1,9 @@
+"""
+This is Crontab event:
+crontab -e
+0 4 * * * BASE_DIR/venv/bin/python3 BASE_DIR/tasks.py
+"""
+
 from config import BASE_DIR
 import os
 from datetime import datetime
