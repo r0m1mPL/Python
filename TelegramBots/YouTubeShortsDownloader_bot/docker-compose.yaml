@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+   project:
+      image: youtube_shorts_downloader
+      build: .
+      container_name: youtube_shorts_downloader_c
+      volumes:
+         - .:/app
+      env_file: .env
