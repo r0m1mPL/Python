@@ -5,3 +5,5 @@ venv
 tmp
 
 __pycache__
+
+*.md

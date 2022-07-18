@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-alpine
 
 WORKDIR /app
 
@@ -9,5 +9,3 @@ RUN pip install -U pip setuptools wheel
 RUN pip install -r requirements.txt
 
 COPY . .
-
-CMD ["python3", "main.py"]

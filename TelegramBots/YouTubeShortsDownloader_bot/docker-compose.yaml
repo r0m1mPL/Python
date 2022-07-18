@@ -2,9 +2,11 @@ version: "3"
 
 services:
    project:
+      restart: always
       image: youtube_shorts_downloader
       build: .
       container_name: youtube_shorts_downloader_c
+      command: python3 main.py
       volumes:
          - .:/app
       env_file: .env
