@@ -16,7 +16,6 @@ class Video:
     title: str
     link: str
     path: Path
-    thumbnail: Path
 
 
 logging.basicConfig(level=logging.INFO)
@@ -34,12 +33,6 @@ async def _make_video_title(title: str) -> str:
     return title
 
 
-
-async def download_video_thumbnail(url, path) -> None:
-    """Downloads video thumbnail"""
-    urllib.request.urlretrieve(url, path)
-
-
 async def download_video(message: types.Message) -> None:
     "Downloads video from YouTube by given url"
     try:
@@ -50,7 +43,6 @@ async def download_video(message: types.Message) -> None:
                 title=yt_title, 
                 link=message.text.strip(), 
                 path=BASE_DIR / f"tmp/{yt_title.replace('?', '')}.mp4", 
-                thumbnail=BASE_DIR / f"tmp/{yt.title}.jpg"
             )
                 
         if not os.path.exists(video.path):
@@ -58,9 +50,6 @@ async def download_video(message: types.Message) -> None:
             yt_video = streams.filter(progressive=True, 
                     file_extension='mp4').get_highest_resolution()
             yt_video.download(BASE_DIR / "tmp")
-
-        if not os.path.exists(video.thumbnail):
-            await download_video_thumbnail(yt.thumbnail_url, video.thumbnail)
     except:
         raise CantDownloadYouTubeVideo
 
@@ -73,7 +62,6 @@ async def send_video(video: Video, message: types.Message) -> None:
             chat_id=message.chat.id,
             video=open(video.path, 'rb'),
             caption=hlink(video.title, video.link),
-            thumb=str(video.thumbnail)
         )
 
     await bot.delete_message(message.chat.id, message.message_id)
