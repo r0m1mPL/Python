@@ -2,7 +2,7 @@ FROM python:3-alpine
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY ./requirements.txt .
 
 RUN pip install -U pip setuptools wheel
 
