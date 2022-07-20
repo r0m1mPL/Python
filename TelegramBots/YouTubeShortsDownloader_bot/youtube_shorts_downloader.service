@@ -4,6 +4,8 @@
 
 [Unit]
 Description=YouTube Shorts Downloader service
+Requires=docker.service
+After=docker.service
 
 [Service]
 Restart=on-failure
